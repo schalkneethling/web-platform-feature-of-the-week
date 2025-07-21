@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>block-size</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .container {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .actions-container {
+      margin-block-end: 2rem;
+    }
+
+    .box-logical,
+    .box-physical {
+      padding: 2rem;
+    }
+
+    .box-physical {
+      background-color: hotpink;
+      height: 20rem;
+      width: 10rem;
+    }
+
+    .box-logical {
+      background-color: rebeccapurple;
+      color: #fff;
+      block-size: 20rem;
+      inline-size: 10rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="actions-container">
+    <button type="button" id="rl">Writing Mode: Top-to-Bottom</button>
+  </div>
+  <div class="container">
+    <div class="box-physical">
+      <h2>Is this REALLY what you wanted in the end?</h2>
+    </div>
+    <div class="box-logical">
+      <h2>Or... is it more like this?</h2>
+    </div>
+  </div>
+  <script>
+    const actionsContainer = document.querySelector(".actions-container");
+
+    actionsContainer.addEventListener("click", (event) => {
+      document.documentElement.style.writingMode = 'vertical-rl';
+    });
+  </script>
+</body>
+
+</html>

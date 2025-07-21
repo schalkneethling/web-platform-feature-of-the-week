@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logical Properties Card Demo</title>
+  <style>
+    body {
+      background-color: #212121;
+    }
+
+    .main-container {
+      display: grid;
+      gap: 1rem;
+      grid-template:
+        "actions actions"
+        "physical logical";
+      margin: auto;
+      max-inline-size: 80lvi;
+
+      .actions-container {
+        grid-area: actions;
+      }
+
+      .card-physical {
+        grid-area: physical;
+      }
+
+      .card-logical {
+        grid-area: logical;
+      }
+
+      .actions-container,
+      .card-physical,
+      .card-logical {
+        background-color: #fff;
+        border: 0.125rem solid hotpink;
+      }
+
+      .card-physical,
+      .card-logical {
+        position: relative;
+
+        h2:nth-child(even) {
+          font-size: 3rem;
+          margin: 0;
+        }
+
+        p {
+          line-height: 1.5;
+          margin: 0;
+          white-space: pre;
+        }
+      }
+
+      .actions-container {
+        padding: 1rem;
+      }
+
+      .card-physical {
+        background-color: #fff2f8;
+        border-left: 0.25rem solid hotpink;
+        border-top: 0.25rem solid hotpink;
+        padding: 0 2rem;
+
+        h2 {
+          margin-top: 2rem;
+        }
+
+        p:nth-child(even) {
+          margin-left: -2rem;
+        }
+
+        img {
+          height: 9.375rem;
+          position: absolute;
+          right: 1rem;
+          top: 1rem;
+          width: auto;
+        }
+      }
+
+      .card-logical {
+        background-color: #fce6ff;
+        border-block-start: 0.25rem solid hotpink;
+        border-inline-start: 0.25rem solid hotpink;
+        padding-inline: 2rem;
+
+        h2 {
+          margin-block-start: 2rem;
+        }
+
+        p:nth-child(even) {
+          margin-inline-start: -2rem;
+        }
+
+        img {
+          block-size: 9.375rem;
+          inline-size: auto;
+          inset-block-start: 1rem;
+          inset-inline-end: 1rem;
+          position: absolute;
+        }
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="main-container">
+    <div class="actions-container">
+      <button type="button" id="ltr">Writing Mode: LTR</button>
+      <button type="button" id="rtl">Writing Mode: RTL</button>
+      <button type="button" id="rl">Writing Mode: Top-to-Bottom</button>
+    </div>
+    <div class="card-physical">
+      <h2>Physical</h2>
+      <h2>The Web</h2>
+
+      <p>
+        You can get caught in it
+        You can be drawn to it
+        You can be free on it
+        You can create for it
+        You can be inspired by it
+        You can find community through it
+        You can inspire others through it
+      </p>
+
+      <p>
+        You can be trapped in a walled garden
+        A walled garden of someone else' making
+        A walled garden filled with dying beauty
+        A walled garden where nothing is what it seems
+        A walled garden where most fruits are poison
+        A walled garden that slowly decays your creativity
+        A walled garden where your soul slowly decay
+      </p>
+
+      <p>
+        Break the walls
+        Break the rules
+        Make the web you want
+      </p>
+      <img src="./assets/star-fist.png" width="493" height="510" alt="">
+    </div>
+    <div class="card-logical">
+      <h2>Logical</h2>
+      <h2>The Web</h2>
+
+      <p>
+        You can get caught in it
+        You can be drawn to it
+        You can be free on it
+        You can create for it
+        You can be inspired by it
+        You can find community through it
+        You can inspire others through it
+      </p>
+
+      <p>
+        You can be trapped in a walled garden
+        A walled garden of someone else' making
+        A walled garden filled with dying beauty
+        A walled garden where nothing is what it seems
+        A walled garden where most fruits are poison
+        A walled garden that slowly decays your creativity
+        A walled garden where your soul slowly decay
+      </p>
+
+      <p>
+        Break the walls
+        Break the rules
+        Make the web you want
+      </p>
+      <img src="./assets/star-fist.png" width="493" height="510" alt="">
+    </div>
+  </main>
+  <script>
+    const actionsContainer = document.querySelector(".actions-container");
+
+    actionsContainer.addEventListener("click", (event) => {
+      const target = event.target;
+      const direction = target.id;
+
+      switch (direction) {
+        case "ltr":
+          document.documentElement.style.writingMode = 'horizontal-tb';
+          document.documentElement.setAttribute("dir", "ltr");
+          break;
+        case "rtl":
+          document.documentElement.style.writingMode = 'horizontal-tb';
+          document.documentElement.setAttribute("dir", "rtl");
+          break;
+        case "rl":
+          document.documentElement.style.writingMode = 'vertical-rl';
+          break;
+      }
+    })
+  </script>
+</body>
+
+</html>
