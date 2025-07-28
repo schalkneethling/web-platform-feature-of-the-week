@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The HTML picture and sources elements with AVIF, WebP, and JPG</title>
+  <style>
+    img {
+      block-size: auto;
+      display: block;
+      max-inline-size: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>The HTML <code>picture</code> and <code>sources</code> elements with AVIF, WebP, and JPG</h1>
+  <p>Depending on the browser used, the browser will either load the AVIF, WebP, or JPG image below.</p>
+
+  <picture>
+    <source srcset="./assets/strapping-fella.avif" type="image/avif">
+    <source srcset="./assets/strapping-fella.webp" type="image/webp">
+    <img src="./assets/strapping-fella.jpg" height="1651" width="2400"
+      alt="Black and white cat with green eyes resting its front paws on a bamboo surface against a green background.">
+  </picture>
+
+  <p>If you wish to compare the quality of the images, you can download them here:</p>
+  <ul>
+    <li><a href="./assets/strapping-fella.jpg" download>The original JPG (420KB)</a></li>
+    <li><a href="./assets/strapping-fella.webp" download>In WebP format (72KB)</a></li>
+    <li><a href="./assets/strapping-fella.avif" download>In AVIF format (29KB)</a></li>
+  </ul>
+
+  <p>Photo by <a
+      href="https://unsplash.com/@madhatterzone?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Manja
+      Vitolic</a> on <a
+      href="https://unsplash.com/photos/black-and-white-cat-lying-on-brown-bamboo-chair-inside-room-gKXKBY-C-Dk?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  </p>
+
+</body>
+
+</html>
