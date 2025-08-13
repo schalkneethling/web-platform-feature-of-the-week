@@ -1,0 +1,23 @@
+.open-trivia {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 20rem 1fr;
+
+  .open-trivia-container {
+    display: grid;
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+    margin-block-start: 2rem;
+    padding: 0;
+
+    button {
+      inline-size: 100%;
+      min-inline-size: 10rem;
+    }
+  }
+
+  .open-trivia-question-heading {
+    margin-block-end: 1rem;
+  }
+}

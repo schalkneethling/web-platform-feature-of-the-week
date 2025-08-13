@@ -1,0 +1,67 @@
+.alert-banner {
+  --color-positive-background: #f0fff0;
+  --color-positive-color: #121e12;
+  --color-positive-border: #1a3c1a;
+  --alert-positive-border: 0.125rem solid var(--color-positive-border);
+
+  --icon-size: 1.5rem;
+
+  display: block;
+
+  .alert-banner-main:not([hidden]) {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding-block: 0;
+    padding-inline: 1rem;
+
+    &.alert-banner-info {
+      background-color: var(--color-positive-background);
+      border: var(--alert-positive-border);
+      color: var(--color-positive-color);
+    }
+  }
+
+  .alert-banner-icon {
+    block-size: var(--icon-size);
+    border-radius: 50%;
+    inline-size: var(--icon-size);
+    pointer-events: none;
+
+    path {
+      fill: var(--color-positive-border);
+    }
+  }
+
+  .alert-banner-close {
+    appearance: none;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+
+    &:hover,
+    &:focus,
+    &:focus-within {
+      outline: none;
+
+      .alert-banner-icon {
+        outline: 0.0625rem solid var(--color-positive-color);
+        outline-offset: 0.1rem;
+
+        .icon-circle {
+          fill: #f0fff0;
+        }
+      }
+    }
+  }
+}
+
+/* https://www.tpgi.com/the-anatomy-of-visually-hidden/ */
+.visually-hidden {
+  block-size: 1px;
+  clip-path: inset(50%);
+  inline-size: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+}
