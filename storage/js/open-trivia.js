@@ -1,11 +1,29 @@
+import { decodeHTML } from "./utils.js";
+
 class OpenTrivia extends HTMLElement {
   #baseEndpoint = "https://opentdb.com/";
   #storageKey = "OpenTrivia";
 
   constructor() {
     super();
+  }
 
-    this.#loadCategories();
+  #showNoCategoryFallbackMessage(message) {
+    const heading = document.createElement("h2");
+    heading.textContent = message;
+
+    this.append(heading);
+    return;
+  }
+
+  connectedCallback() {
+    try {
+      this.#loadCategories();
+    } catch (error) {
+      this.#showNoCategoryFallbackMessage(
+        `Failed to load categories: ${error.message}`,
+      );
+    }
   }
 
   #fetchCategories = async () => {
@@ -23,7 +41,7 @@ class OpenTrivia extends HTMLElement {
 
       return responseJSON.trivia_categories;
     } catch (error) {
-      throw new Error(`Failed to fetch: ${error.message}`);
+      throw new Error("Failed to fetch categories", { cause: error });
     }
   };
 
@@ -58,11 +76,9 @@ class OpenTrivia extends HTMLElement {
     this.innerHTML = "";
 
     if (!categories) {
-      const message = "No categories. Please try again later.";
-      const heading = document.createElement("h2");
-      heading.textContent = message;
-
-      this.append(heading);
+      this.#showNoCategoryFallbackMessage(
+        "No categories. Please try again later.",
+      );
       return;
     }
 
@@ -72,6 +88,8 @@ class OpenTrivia extends HTMLElement {
     const categoryList = categories.map((category) => {
       const item = document.createElement("li");
       const categoryButton = document.createElement("button");
+      categoryButton.type = "button";
+      categoryButton.classList.add("open-trivia-category-button");
       categoryButton.textContent = category.name;
       categoryButton.dataset.categoryId = category.id;
       item.appendChild(categoryButton);
@@ -99,7 +117,7 @@ class OpenTrivia extends HTMLElement {
       const responseJSON = await response.json();
       return responseJSON;
     } catch (error) {
-      throw new Error(`Error loading trivia question: ${error.message}`);
+      throw new Error("Error loading trivia question", { cause: error });
     }
   };
 
@@ -117,7 +135,7 @@ class OpenTrivia extends HTMLElement {
 
     const question = document.createElement("h2");
     question.classList.add("open-trivia-question-heading");
-    question.innerHTML = triviaQuestion.question;
+    question.textContent = decodeHTML(triviaQuestion.question);
 
     const revealButton = document.createElement("button");
     revealButton.type = "button";
@@ -126,7 +144,7 @@ class OpenTrivia extends HTMLElement {
     const answer = document.createElement("p");
     answer.hidden = true;
     answer.tabIndex = -1;
-    answer.innerHTML = triviaQuestion.correct_answer;
+    answer.textContent = decodeHTML(triviaQuestion.correct_answer);
 
     container.append(question, revealButton, answer);
 
@@ -143,7 +161,7 @@ class OpenTrivia extends HTMLElement {
       this.querySelectorAll(".open-trivia-container button"),
     );
 
-    if (!categorySelections) {
+    if (!categorySelections.length) {
       return;
     }
 
@@ -154,17 +172,42 @@ class OpenTrivia extends HTMLElement {
 
   #addEventListeners() {
     this.addEventListener("click", async (event) => {
-      if (event.target.tagName.toLowerCase() === "button") {
-        this.#toggleCategories();
+      if (!event.target.closest(".open-trivia-category-button")) {
+        return;
+      }
 
-        const triviaQuestion = await this.#loadTriviaQuestion(
-          event.target.dataset.categoryId,
+      this.#toggleCategories();
+
+      const triviaQuestion = await this.#loadTriviaQuestion(
+        event.target.dataset.categoryId,
+      );
+
+      if (!triviaQuestion) {
+        const message = "No trivia question. Please try another category.";
+        const noQuestionHeading = document.createElement("h2");
+        noQuestionHeading.textContent = message;
+
+        const previousContainer = this.querySelector(
+          ".open-trivia-question-container",
         );
 
-        setTimeout(this.#toggleCategories.bind(this), 5000);
+        if (previousContainer) {
+          previousContainer.innerHTML = "";
+          previousContainer.append(noQuestionHeading);
+          return;
+        }
 
-        this.#showTriviaQuestion(triviaQuestion.results[0]);
+        const container = document.createElement("div");
+        container.classList.add("open-trivia-question-container");
+        container.append(noQuestionHeading);
+
+        this.append(container);
+        return;
       }
+
+      // requests are rate limited to 1 per 5 seconds
+      setTimeout(this.#toggleCategories.bind(this), 5000);
+      this.#showTriviaQuestion(triviaQuestion.results[0]);
     });
   }
 }

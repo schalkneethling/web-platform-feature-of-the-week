@@ -1,37 +1,71 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Local and Session storage in the browser - Web Platform Feature of the
+      Week
+    </title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./css/reset.css"
+      media="screen"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./css/alert-banner.css"
+      media="screen"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./css/open-trivia.css"
+      media="screen"
+    />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Local and Session storage in the browser - Web Platform Feature of the Week</title>
-  <link rel="stylesheet" type="text/css" href="./css/reset.css" media="screen">
-  <link rel="stylesheet" type="text/css" href="./css/alert-banner.css" media="screen">
-  <link rel="stylesheet" type="text/css" href="./css/open-trivia.css" media="screen">
-</head>
+  <body>
+    <alert-banner class="alert-banner">
+      <div
+        class="alert-banner-main alert-banner-info"
+        id="3edf66fe-7934-40f0-bf79-fff309523472"
+        role="status"
+        aria-live="polite"
+        hidden
+      >
+        <p class="alert-banner-content">
+          New categories have been added. Enjoy!
+        </p>
+        <button class="alert-banner-close" type="button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="alert-banner-icon"
+            viewBox="0 0 16 16"
+          >
+            <path
+              class="icon-circle"
+              d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"
+            />
+            <path
+              d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"
+            />
+          </svg>
+          <span class="visually-hidden">Dismiss message</span>
+        </button>
+      </div>
+    </alert-banner>
 
-<body>
-  <alert-banner class="alert-banner">
-    <div class="alert-banner-main alert-banner-info" id="3edf66fe-7934-40f0-bf79-fff309523472" hidden>
-      <p class="alert-banner-content">New categories have been added. Enjoy!</p>
-      <button class="alert-banner-close">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="alert-banner-icon"
-          viewBox="0 0 16 16">
-          <path class="icon-circle" d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-          <path
-            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-        </svg>
-        <span class="visually-hidden">Dismiss message</span>
-      </button>
-    </div>
-  </alert-banner>
+    <h1>Open Trivia</h1>
 
-  <h1>Open Trivia</h1>
+    <open-trivia class="open-trivia"></open-trivia>
 
-  <open-trivia class="open-trivia"></open-trivia>
-
-  <script src="./js/open-trivia.js" type="module"></script>
-  <script src="./js/alert-banner.js" type="module"></script>
-</body>
-
+    <script src="./js/open-trivia.js" type="module"></script>
+    <script src="./js/alert-banner.js" type="module"></script>
+  </body>
 </html>

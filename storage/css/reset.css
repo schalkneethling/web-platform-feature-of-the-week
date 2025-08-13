@@ -21,6 +21,7 @@ html {
   -moz-text-size-adjust: none;
   /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-text-size-adjust: none;
+  /* stylelint-disable-next-line plugin/use-baseline */
   text-size-adjust: none;
 }
 
@@ -42,13 +43,19 @@ body {
   /* If supported, inherits the iOS font settings
      More at https://frontendmasters.com/blog/letting-ios-text-size-setting-affect-font-size-on-the-web/ */
   /* stylelint-disable-next-line font-family-no-missing-generic-family-keyword */
-  font-family: -apple-system-body, system-ui, sans-serif;
+  font: -apple-system-body;
   font-size: 100%; /* Respect user choice */
-  line-height: var(--minimalist-typography-document-line-height, 1.5);
+  line-height: var(--minimalist-typography-document-line-height);
+
+  /* fallback for older browsers */
   min-block-size: 100vh;
 
+  /* synamic viewport block size - https://developer.mozilla.org/en-US/docs/Web/CSS/length#vb */
+  min-block-size: 100dvb;
+
   /* https://developer.mozilla.org/en-US/docs/Web/CSS/text-rendering#browser_compatibility */
-  text-rendering: optimizelegibility;
+  /* stylelint-disable-next-line value-keyword-case */
+  text-rendering: optimizeLegibility;
 }
 
 summary {
@@ -59,7 +66,7 @@ summary {
 button,
 input,
 label {
-  line-height: var(--minimalist-typography-interactive-line-height, 1.2);
+  line-height: var(--minimalist-typography-interactive-line-height);
 }
 
 /* Remove built-in form typography styles */
@@ -82,6 +89,7 @@ h1,
 h2,
 h3,
 h4 {
+  /* stylelint-disable-next-line plugin/use-baseline */
   text-wrap: balance;
 }
 

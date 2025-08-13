@@ -3,7 +3,9 @@ class AlertBanner extends HTMLElement {
 
   constructor() {
     super();
+  }
 
+  connectedCallback() {
     this.#showBanners();
   }
 
@@ -16,7 +18,7 @@ class AlertBanner extends HTMLElement {
       }
 
       const dismissedBanners = JSON.parse(storageObject);
-      return dismissedBanners;
+      return dismissedBanners.disabledBanners;
     } catch (error) {
       throw new Error(`Failed to load dismissed banners: ${error.message}`);
     }
@@ -41,7 +43,7 @@ class AlertBanner extends HTMLElement {
 
     const dismissedBannerIds = this.#getDismissedBanners();
 
-    if (dismissedBannerIds) {
+    if (dismissedBannerIds && dismissedBannerIds.length) {
       banners = banners.filter(
         (banner) => !dismissedBannerIds.includes(banner.id),
       );
@@ -55,17 +57,17 @@ class AlertBanner extends HTMLElement {
     this.addEventListener("click", (event) => {
       event.stopPropagation();
 
-      if (event.target.tagName.toLowerCase() !== "button") {
+      if (event.target.closest(".alert-banner-close")) {
         return;
       }
 
       const banner = event.target.parentElement;
-      const bannerId = event.target.parentElement.id;
+      const bannerId = banner.id;
 
       if (bannerId) {
         try {
           localStorage.setItem(
-            "AlertBanner",
+            this.#storageKey,
             JSON.stringify({
               disabledBanners: [bannerId],
             }),
