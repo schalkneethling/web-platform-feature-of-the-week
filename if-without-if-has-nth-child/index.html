@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>if without if using CSS with has and nth-child</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .container {
+      --track-size: minmax(15rem, 1fr);
+
+      display: grid;
+      grid-template-columns: repeat(auto-fit, var(--track-size));
+      gap: 1rem;
+      list-style: none;
+      margin: auto;
+      margin-block-start: 2rem;
+      max-inline-size: 65vw;
+    }
+
+    .container:has(> :nth-child(5)) {
+      --track-size: minmax(20rem, 1fr);
+    }
+
+    .container li {
+      background-color: hotpink;
+      padding: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <h1><code>if()</code> without <code>if()</code> in CSS using <code>:has</code> and <code>:nth-child</code></h1>
+  <p>When there are four or fewer items in the grid, each item is set to <code>15rem</code>.</p>
+  <ul class="container">
+    <li>One</li>
+    <li>Two</li>
+    <li>Three</li>
+    <li>Four</li>
+  </ul>
+
+  <p>When there are more than four items in the grid, each item is set to <code>20rem</code>. This is ensures better
+    wrapping of the card containers.</p>
+  <ul class="container">
+    <li>One</li>
+    <li>Two</li>
+    <li>Three</li>
+    <li>Four</li>
+    <li>Five</li>
+  </ul>
+</body>
+
+</html>
