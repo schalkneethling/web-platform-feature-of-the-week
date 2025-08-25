@@ -1,0 +1,10 @@
+.icon-button {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+
+  svg {
+    block-size: 10rem;
+    inline-size: auto;
+  }
+}

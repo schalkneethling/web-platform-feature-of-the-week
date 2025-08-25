@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Delegation and Closest</title>
+  <link href="./css/reset.css" rel="stylesheet" type="text/css" media="screen">
+  <link href="./css/main.css" rel="stylesheet" type="text/css" media="screen">
+</head>
+
+<body>
+  <h1>Media Planner</h1>
+  <media-planner id="app">
+    <h2>Available to watch</h2>
+    <ul class="list-container available-titles"></ul>
+
+    <h2>My Watchlist</h2>
+    <ul class="list-container watchlist"></ul>
+
+    <template id="media-entry">
+      <li class="media-entry">
+        <img class="media-poster" height="812" width="550">
+        <button class="media-action-button"></button>
+      </li>
+    </template>
+  </media-planner>
+  <script src="./js/media-planner.js" type="module"></script>
+</body>
+
+</html>
