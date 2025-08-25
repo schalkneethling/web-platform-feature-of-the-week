@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+}
+
+.container {
+  --grid-col-count: 8;
+  --min-col-span: 2;
+  --max-col-span: 6;
+
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(var(--grid-col-count), 1fr);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  &.compact {
+    --min-col-span: 1;
+    --max-col-span: 4;
+  }
+
+  &.spacious {
+    --min-col-span: 4;
+    --max-col-span: 8;
+  }
+
+  li {
+    --card-count: sibling-count();
+
+    background-color: #212121;
+    grid-column: span
+      round(
+        clamp(
+          var(--min-col-span),
+          calc(var(--grid-col-count) / var(--card-count)),
+          var(--max-col-span)
+        )
+      );
+    padding: 1rem;
+
+    img {
+      aspect-ratio: 1 / 1;
+      inline-size: 100%;
+      object-fit: cover;
+    }
+  }
+}
