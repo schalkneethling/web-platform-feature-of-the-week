@@ -1,18 +1,18 @@
 class ImgGallery extends HTMLElement {
-  #gallerySize;
+  #galleryCount;
   #galleryStyle;
 
   constructor() {
     super();
 
-    this.#gallerySize = this.getAttribute("gallery-size");
+    this.#galleryCount = this.getAttribute("gallery-count");
     this.#galleryStyle = this.getAttribute("gallery-style");
   }
 
   #getImages = async () => {
     try {
       const response = await fetch(
-        `https://picsum.photos/v2/list?limit=${this.#gallerySize}`,
+        `https://picsum.photos/v2/list?limit=${this.#galleryCount}`,
       );
 
       if (response.ok) {

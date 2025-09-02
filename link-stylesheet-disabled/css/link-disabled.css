@@ -1,0 +1,21 @@
+body {
+    margin: 0;
+}
+
+.hero {
+    display: grid;
+    grid-template-areas: "stack";
+    max-block-size: 150vh;
+    inline-size: 100%;
+    overflow: clip;
+    place-items: center;
+
+    .hero-title,
+    img {
+        grid-area: stack;
+    }
+
+    .hero-title {
+        font-size: clamp(3rem, 20vw, 10rem);
+    }
+}
