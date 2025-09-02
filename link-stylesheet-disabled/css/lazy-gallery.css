@@ -1,0 +1,28 @@
+.gallery-container {
+    background: #212121 url("../assets/stars.webp") center center no-repeat;
+    background-size: cover;
+
+    .gallery {
+        display: flex;
+        gap: 1.5rem;
+        list-style: none;
+        margin: 0;
+        overflow-x: auto;
+        padding: 2rem;
+        scrollbar-color: #387A91 #222;
+        scrollbar-width: thin;
+
+        li {
+            flex: 1 1 35%;
+            min-inline-size: 20rem;
+        }
+
+        img {
+            aspect-ratio: 9 / 16;
+            block-size: auto;
+            inline-size: 100%;
+            max-block-size: 40rem;
+            object-fit: cover;
+        }
+    }
+}

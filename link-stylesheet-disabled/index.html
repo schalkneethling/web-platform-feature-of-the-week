@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>link with disabled: Demo</title>
+  <link rel="stylesheet" type="text/css" href="./css/reset.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="./css/link-disabled.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="./css/lazy-gallery.css" media="screen" disabled>
+  <link rel="stylesheet" type="text/css" href="./css/lazy-credits.css" media="screen" disabled>
+</head>
+
+<body>
+  <div class="hero">
+    <img src="./assets/sky.webp" height="3643" width="5464"
+      alt="Aerial view of a vast expanse of white clouds with snow-covered mountain peaks emerging above the cloud layer, under a soft, pastel-colored sky.">
+    <h1 class="hero-title">Welcome</h1>
+  </div>
+  <div class="gallery-container">
+    <ul class="gallery">
+      <li>
+        <img src="./assets/planet002.webp" height="2880" width="1800"
+          alt="A colorful gas giant planet with horizontal bands of blue, white, and brown against a black space background."
+          loading="lazy" decoding="async" fetchpriority="low">
+      </li>
+      <li>
+        <img src="./assets/planet002.webp" height="2880" width="1800"
+          alt="A colorful gas giant planet with horizontal bands of blue, white, and brown against a black space background."
+          loading="lazy" decoding="async" fetchpriority="low">
+      </li>
+      <li>
+        <img src="./assets/planet002.webp" height="2880" width="1800"
+          alt="A colorful gas giant planet with horizontal bands of blue, white, and brown against a black space background."
+          loading="lazy" decoding="async" fetchpriority="low">
+      </li>
+      <li>
+        <img src="./assets/planet002.webp" height="2880" width="1800"
+          alt="A colorful gas giant planet with horizontal bands of blue, white, and brown against a black space background."
+          loading="lazy" decoding="async" fetchpriority="low">
+      </li>
+      <li>
+        <img src="./assets/planet002.webp" height="2880" width="1800"
+          alt="A colorful gas giant planet with horizontal bands of blue, white, and brown against a black space background."
+          loading="lazy" decoding="async" fetchpriority="low">
+      </li>
+      <li>
+        <img src="./assets/planet002.webp" height="2880" width="1800"
+          alt="A colorful gas giant planet with horizontal bands of blue, white, and brown against a black space background."
+          loading="lazy" decoding="async" fetchpriority="low">
+      </li>
+    </ul>
+  </div>
+  <ul class="credits">
+    <li>
+      <p>Photo by <a
+          href="https://unsplash.com/@loveneora?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Neora
+          Aylon</a> on <a
+          href="https://unsplash.com/photos/the-night-sky-is-filled-with-stars-and-clouds-F2n7CmMDhs4?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+      </p>
+    </li>
+    <li>
+      <p>Photo by <a
+          href="https://unsplash.com/@wirhabenzeit?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Dominik
+          Schröder</a> on <a
+          href="https://unsplash.com/photos/white-clouds-during-daytime-FIKD9t5_5zQ?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+      </p>
+    </li>
+    <li>
+      <p>Photo by <a
+          href="https://unsplash.com/@boliviainteligente?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">BoliviaInteligente</a>
+        on <a
+          href="https://unsplash.com/photos/a-purple-and-blue-object-floating-in-the-air-8xFoR-jG8iM?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+      </p>
+    </li>
+    <li>
+      <p>Photo by <a
+          href="https://unsplash.com/@tianhao_wang?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Tianhao
+          Wang</a> on <a
+          href="https://unsplash.com/photos/a-person-standing-under-a-tree-at-night-8eeB6YGT-Fc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+
+      </p>
+    </li>
+    <li>
+      <p>Photo by <a
+          href="https://unsplash.com/@boliviainteligente?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">BoliviaInteligente</a>
+        on <a
+          href="https://unsplash.com/photos/a-purple-and-pink-object-floating-in-the-air-Ep6f8t9fYA8?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+      </p>
+    </li>
+    <li>
+      <p>Photo by <a
+          href="https://unsplash.com/@pawel_czerwinski?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Pawel
+          Czerwinski</a> on <a
+          href="https://unsplash.com/photos/blue-planet-paintning-fAd4u_HTGGY?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+      </p>
+    </li>
+  </ul>
+  <script type="module">
+    const lazyStylesheets = Array.from(document.querySelectorAll('link[rel="stylesheet"][disabled]'));
+    const target = document.querySelector('.gallery-container');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          lazyStylesheets.forEach(link => link.disabled = false);
+          observer.disconnect();
+        }
+      });
+    });
+
+    observer.observe(target);
+  </script>
+</body>
+
+</html>

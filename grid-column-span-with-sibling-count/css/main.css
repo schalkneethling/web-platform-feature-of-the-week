@@ -14,12 +14,12 @@ body {
   margin: 0;
   padding: 0;
 
-  &.compact {
+  &.mosaic {
     --min-col-span: 1;
     --max-col-span: 4;
   }
 
-  &.spacious {
+  &.showcase {
     --min-col-span: 4;
     --max-col-span: 8;
   }
@@ -32,7 +32,7 @@ body {
       round(
         clamp(
           var(--min-col-span),
-          calc(var(--grid-col-count) / var(--card-count)),
+          calc(var(--card-count) / var(--grid-col-count)),
           var(--max-col-span)
         )
       );
