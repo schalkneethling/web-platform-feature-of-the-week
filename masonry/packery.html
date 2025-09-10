@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Packery</title>
+  <link rel="stylesheet" type="text/css" href="../css/reset.css" media="screen">
+  <style>
+    .packery-container {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .packery-list-item {
+      inline-size: 20rem;
+
+      a:link,
+      a:visited {
+        border: 0.125rem solid #212121;
+        color: #212121;
+        display: block;
+        padding: 0.25rem;
+        text-align: center;
+      }
+
+      a:hover,
+      a:focus-visible {
+        border: 0;
+        outline: 0.125rem solid #212121;
+        outline-offset: 0.25rem;
+        text-decoration: none;
+      }
+
+      figcaption {
+        margin-block-start: 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <script src="https://unpkg.com/packery@3/dist/packery.pkgd.js"></script>
+  <script type="module">
+    const container = document.createElement("ul");
+    container.classList.add("packery-container");
+
+    async function getImages() {
+      try {
+        const response = await fetch("https://verdant-puffpuff-d076f3.netlify.app/fakr/images?perPage=20");
+
+        if (response.ok) {
+          const images = await response.json();
+          return images;
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    async function render() {
+      const images = await getImages();
+
+      if (images.length) {
+        const imageList = images.map((image) => {
+          const listItem = document.createElement("li");
+          listItem.classList.add("packery-list-item");
+          const anchor = document.createElement("a");
+          const picture = document.createElement("picture");
+          const figcaption = document.createElement("figcaption");
+          const img = document.createElement("img");
+
+          anchor.href = image.link;
+          anchor.target = "_blank";
+          anchor.rel = "external noopener noreferrer";
+
+          img.src = image.urls.regular;
+          img.alt = image.description;
+          img.height = image.height;
+          img.width = image.width;
+
+          figcaption.textContent = image.username;
+
+          anchor.append(picture);
+          picture.append(img);
+          picture.append(figcaption);
+          listItem.append(anchor);
+          return listItem;
+        });
+
+        container.append(...imageList);
+        document.body.append(container);
+
+        const packery = new Packery(container, {
+          itemSelector: ".packery-list-item",
+          gutter: 16,
+          percentPosition: true,
+        });
+      }
+    }
+
+    render();
+  </script>
+</body>
+
+</html>
