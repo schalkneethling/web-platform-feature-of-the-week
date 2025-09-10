@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Platform Masonry</title>
+  <link rel="stylesheet" type="text/css" href="../css/reset.css" media="screen">
+  <style>
+    html,
+    .container {
+      min-block-size: 100dvb;
+    }
+
+    .container {
+      display: masonry;
+      /* masonry: "a a b" 5px 20px 45px row; */
+      /* masonry: repeat(2, 10rem) repeat(auto-fit, 15rem) 45rem; */
+      masonry: repeat(auto-fit, minmax(20rem, 1fr));
+      gap: 1rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .featured {
+      grid-column: span 3;
+    }
+
+    .full-bleed {
+      grid-column: 1 / -1;
+    }
+
+    .list-item {
+
+      a:link,
+      a:visited {
+        border: 0.125rem solid #212121;
+        color: #212121;
+        display: block;
+        padding: 0.25rem;
+        text-align: center;
+      }
+
+      a:hover,
+      a:focus-visible {
+        border: 0;
+        outline: 0.125rem solid #212121;
+        outline-offset: 0.25rem;
+        text-decoration: none;
+      }
+
+      figcaption {
+        margin-block-start: 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <script src="https://unpkg.com/packery@3/dist/packery.pkgd.js"></script>
+  <script type="module">
+    const container = document.createElement("ul");
+    container.classList.add("container");
+
+    async function getImages() {
+      try {
+        const response = await fetch("https://verdant-puffpuff-d076f3.netlify.app/fakr/images");
+
+        if (response.ok) {
+          const images = await response.json();
+          return images;
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    async function render() {
+      const images = await getImages();
+
+      if (images.length) {
+        const imageList = images.map((image, index) => {
+          const listItem = document.createElement("li");
+          listItem.classList.add("list-item");
+
+          if ([0, 4].includes(index)) {
+            listItem.classList.add("featured");
+          }
+
+          const anchor = document.createElement("a");
+          const picture = document.createElement("picture");
+          const figcaption = document.createElement("figcaption");
+          const img = document.createElement("img");
+
+          anchor.href = image.link;
+          anchor.target = "_blank";
+          anchor.rel = "external noopener noreferrer";
+
+          img.src = image.urls.regular;
+          img.alt = image.description;
+          img.height = image.height;
+          img.width = image.width;
+
+          figcaption.textContent = image.username;
+
+          anchor.append(picture);
+          picture.append(img);
+          picture.append(figcaption);
+          listItem.append(anchor);
+          return listItem;
+        });
+
+        container.append(...imageList);
+        document.body.append(container);
+      }
+    }
+
+    render();
+  </script>
+</body>
+
+</html>
